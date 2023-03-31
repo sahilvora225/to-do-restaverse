@@ -7,7 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      sh -c "python3 manage.py migrate &&
+      sh -c "python3 manage.py wait_for_db &&
+             python3 manage.py migrate &&
              python3 manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
@@ -17,7 +18,7 @@ services:
       # Used for hot reload
       - ./app:/app
     depends_on:
-      - postgres
+      - to-do-postgres
   to-do-postgres:
     container_name: "to-do-postgres"
     image: postgres:15.2-bullseye
