@@ -1,0 +1,20 @@
+.task-arena {
+    padding: 3rem 5rem;
+}
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-row h1 {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.title-row a {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}

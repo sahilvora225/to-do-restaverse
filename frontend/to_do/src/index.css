@@ -1,0 +1,18 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+:root {
+  --primary-color: #ea3b52;
+}
+
+html {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  font-size: 62.5%;
+}
