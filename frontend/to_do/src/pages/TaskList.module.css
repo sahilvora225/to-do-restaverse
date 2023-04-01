@@ -18,3 +18,13 @@
     color: var(--primary-color);
     text-decoration: none;
 }
+
+@media screen and (max-width: 900px) {
+    .task-arena {
+        padding: 3rem 1rem;
+    }
+
+    .title-row h1 {
+        font-size: 1.5rem;
+    }
+}
