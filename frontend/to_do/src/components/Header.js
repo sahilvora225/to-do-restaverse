@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { taskActions } from '../store/tasks';
+import { addNewTaskData } from '../store/tasks';
 
 import styles from './Header.module.css';
 
@@ -23,7 +23,7 @@ const Header = () => {
         if (submitValue === '') {
             return;
         }
-        dispatch(taskActions.addNewTask(submitValue))
+        dispatch(addNewTaskData({'name': submitValue, 'status': 0}));
         setTitle('');
         setSubmitValue('');
     }, [submitValue, dispatch]);

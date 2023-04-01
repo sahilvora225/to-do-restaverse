@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { taskActions } from '../store/tasks';
+import { updateTaskData } from '../store/tasks';
 
 import styles from './Task.module.css';
 
@@ -8,7 +8,7 @@ const Task = (props) => {
     let dispatch = useDispatch();
 
     let toggleTaskStatus = () => {
-        dispatch(taskActions.updateTask({id: props.id, status: +!props.status}))
+        dispatch(updateTaskData({id: props.id, status: +!props.status}))
     }
 
     return (

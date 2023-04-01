@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from 'axios';
 
 const initialState = {
-    taskList: [{id: 0, name: 'My Task', 'created_at': '2023-04-01 12:00:00', status: 0}]
+    taskList: []
 }
 
 const taskSlice = createSlice({
@@ -9,13 +10,7 @@ const taskSlice = createSlice({
     initialState,
     reducers: {
         addNewTask (state, action) {
-            let newTask = {
-                id: state.taskList.length,
-                name: action.payload,
-                'created_at': '2023-04-01 01:00:00',
-                status: 0
-            }
-            state.taskList.unshift(newTask);
+            state.taskList.unshift(action.payload);
             return state;
         },
         updateTask (state, action) {
@@ -26,9 +21,36 @@ const taskSlice = createSlice({
                 state.taskList[index].status = action.payload.status;
             }
             return state;
+        },
+        refreshTaskList (state, action) {
+            state.taskList = action.payload;
+            return state;
         }
     }
 })
 
 export default taskSlice;
 export const taskActions = taskSlice.actions;
+export const fetchTasksData = () => {
+    return async (dispatch) => {
+        let response = await axios.get('/tasks/');
+        dispatch(taskActions.refreshTaskList(response.data));
+    }
+}
+export const addNewTaskData = (newTask) => {
+    return async (dispatch) => {
+        let response = await axios.post('/tasks/', newTask);
+        dispatch(taskActions.addNewTask(response.data));
+    }
+}
+export const updateTaskData = (taskDetails) => {
+    return async (dispatch) => {
+        let response = await axios.put(
+            `/tasks/update/${taskDetails.id}/`,
+            {'status': taskDetails.status}
+        )
+        if (response.status === 200) {
+            dispatch(taskActions.updateTask({...taskDetails}));
+        }
+    }
+}

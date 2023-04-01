@@ -13,16 +13,6 @@ class TaskView(ListCreateAPIView):
     permission_classes = [AllowAny]
     authentication_classes = []
 
-    def get_queryset(self, *args, **kwargs):
-        status = kwargs.get('status', 0)
-        queryset = Task.objects.filter(status=status).order_by('-created_at')
-        return queryset
-    
-    def get(self, request, status):
-        queryset = self.get_queryset(status=status)
-        serializer = self.get_serializer_class()(queryset, many=True)
-        return Response(serializer.data)
-
 
 class UpdateTaskView(UpdateAPIView):
     serializer_class = UpdateTaskSerializer
